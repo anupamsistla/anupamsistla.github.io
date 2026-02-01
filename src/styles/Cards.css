@@ -253,13 +253,18 @@
 /* Mobile Responsive Styles for Skills */
 @media (max-width: 768px) {
   .skills-container {
-    overflow-x: auto;
-    font-size: 0.75rem;
+    overflow-x: scroll;
+    font-size: 0.6rem;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .skill-category {
+    min-width: max-content;
   }
 
   .skill-category pre {
     white-space: pre;
-    overflow-x: auto;
+    overflow: visible;
   }
 
   .project-item {
@@ -323,12 +328,6 @@
     padding: 12px;
   }
 
-  .info-btn {
-    top: 12px;
-    right: 12px;
-    bottom: auto;
-  }
-
   .company-name {
     font-size: 1em;
   }
@@ -356,7 +355,16 @@
 
 @media (max-width: 480px) {
   .skills-container {
-    font-size: 0.5rem;
+    font-size: 0.45rem;
+    overflow-x: scroll;
+  }
+  
+  .skill-category {
+    min-width: max-content;
+  }
+  
+  .skill-category pre {
+    white-space: pre;
   }
 }
 
