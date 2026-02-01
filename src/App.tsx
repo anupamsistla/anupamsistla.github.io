@@ -7,7 +7,7 @@ const App: React.FC = () => {
     <div className="App">
       <div className="content-wrapper">
         <div className="header-section">
-          <h1 className="portfolio-name">ANUPAM_SISTLA.EXE</h1>
+          <h1 className="portfolio-name">ANUPAM_SISTLA</h1>
           <div className="quick-actions">
             <button className="quick-btn" onClick={() => window.open(`${process.env.PUBLIC_URL}/Resume/Anupam_Resume.pdf`, '_blank')}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">

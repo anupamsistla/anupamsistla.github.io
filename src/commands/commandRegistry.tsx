@@ -39,7 +39,7 @@ export const commands: { [key: string]: Command } = {
   },
   experience: {
     name: 'experience',
-    description: 'My Work Experience',
+    description: 'My Work Ex',
     execute: () => {
       return {
         type: 'experience'
