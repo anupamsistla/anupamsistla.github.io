@@ -14,6 +14,9 @@ const WelcomeMessage: React.FC = () => (
     Explore projects, experience, and skills using terminal commands.
     <br />
     Type <span style={{ color: '#ff8800', fontWeight: 'bold' }}>'help'</span> to begin.
+    <br />
+    <br />
+    <span style={{ color: '#888' }}>Tip: Use <span style={{ color: '#ff8800', fontWeight: 'bold' }}>Tab</span> for command completion, <span style={{ color: '#ff8800', fontWeight: 'bold' }}>Arrow Up</span> for command history</span>
   </div>
 );
 
@@ -58,7 +61,7 @@ const Terminal: React.FC = () => {
     const output = handleCommand(input);
     
     if (output.type === 'text' && output.content === 'CLEAR') {
-      setHistory([]);
+      setHistory([{ command: '', output: { type: 'text', content: <WelcomeMessage /> } }]);
       return;
     }
 

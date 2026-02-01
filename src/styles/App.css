@@ -43,9 +43,9 @@ body {
 .portfolio-name {
   font-family: 'Courier New', Courier, monospace;
   font-weight: 700;
-  font-size: 3.5rem;
+  font-size: 2.5rem;
   font-style: normal;
-  letter-spacing: 8px;
+  letter-spacing: 6px;
   background: linear-gradient(90deg, #ff8800 0%, #ffaa44 50%, #ff8800 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -91,17 +91,59 @@ body {
   flex-shrink: 0;
 }
 
-.portfolio-name {
-  font-family: 'Courier New', Courier, monospace;
-  font-weight: 700;
-  font-size: 3.5rem;
-  font-style: normal;
-  letter-spacing: 8px;
-  background: linear-gradient(90deg, #ff8800 0%, #ffaa44 50%, #ff8800 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-shadow: 0 0 30px rgba(255, 136, 0, 0.3);
-  margin: 0;
-  text-transform: uppercase;
+/* Mobile Responsive Styles */
+@media (max-width: 900px) {
+  .header-section {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .quick-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 768px) {
+  .App {
+    padding: 5px;
+  }
+
+  .content-wrapper {
+    gap: 10px;
+    max-height: calc(100vh - 10px);
+  }
+
+  .header-section {
+    width: 100%;
+  }
+
+  .quick-btn {
+    padding: 8px 6px;
+    font-size: 10px;
+    gap: 4px;
+    justify-content: center;
+  }
+
+  .quick-btn svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .App {
+    padding: 3px;
+  }
+
+  .quick-actions {
+    gap: 6px;
+  }
+
+  .quick-btn {
+    flex: 1;
+    padding: 6px 4px;
+    font-size: 9px;
+  }
 }

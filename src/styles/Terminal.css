@@ -151,7 +151,7 @@
   outline: none;
   color: #ffffff;
   font-family: 'Courier New', Courier, monospace;
-  font-size: 14px;
+  font-size: 16px;
   padding: 0;
   caret-color: #ff8800;
 }
@@ -164,7 +164,7 @@
 
 .output pre {
   font-family: 'Courier New', Courier, monospace;
-  font-size: 14px;
+  font-size: 16px;
   white-space: pre-wrap;
   word-wrap: break-word;
   margin: 0;
@@ -172,22 +172,22 @@
 }
 
 /* Scrollbar styling */
-.terminal::-webkit-scrollbar {
+.terminal-content::-webkit-scrollbar {
   width: 8px;
 }
 
-.terminal::-webkit-scrollbar-track {
+.terminal-content::-webkit-scrollbar-track {
+  background: #1a1a1a;
+  border-radius: 4px;
+}
+
+.terminal-content::-webkit-scrollbar-thumb {
   background: #ff8800;
   border-radius: 4px;
 }
 
-.terminal::-webkit-scrollbar-thumb {
-  background: #333333;
-  border-radius: 4px;
-}
-
-.terminal::-webkit-scrollbar-thumb:hover {
-  background: #555555;
+.terminal-content::-webkit-scrollbar-thumb:hover {
+  background: #ffaa44;
 }
 
 /* Links in output */

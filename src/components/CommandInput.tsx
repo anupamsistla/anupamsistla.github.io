@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { commands } from '../commands/commandRegistry';
 
 interface CommandInputProps {
   onCommandSubmit: (command: string) => void;
@@ -8,11 +9,40 @@ interface CommandInputProps {
 const CommandInput: React.FC<CommandInputProps> = ({ onCommandSubmit, getHistoryCommand }) => {
   const [input, setInput] = useState('');
 
+  const handleTabCompletion = () => {
+    if (!input.trim()) return;
+
+    const availableCommands = Object.keys(commands);
+    const matches = availableCommands.filter(cmd => 
+      cmd.startsWith(input.toLowerCase().trim())
+    );
+
+    if (matches.length === 1) {
+      setInput(matches[0]);
+    } else if (matches.length > 1) {
+      // Find common prefix
+      const commonPrefix = matches.reduce((acc, cmd) => {
+        let i = 0;
+        while (i < acc.length && i < cmd.length && acc[i] === cmd[i]) {
+          i++;
+        }
+        return acc.substring(0, i);
+      }, matches[0]);
+      
+      if (commonPrefix.length > input.length) {
+        setInput(commonPrefix);
+      }
+    }
+  };
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       e.preventDefault();
       onCommandSubmit(input);
       setInput('');
+    } else if (e.key === 'Tab') {
+      e.preventDefault();
+      handleTabCompletion();
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
       const historyCmd = getHistoryCommand('up');

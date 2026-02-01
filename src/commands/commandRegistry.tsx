@@ -6,7 +6,7 @@ import { skills } from '../data/skills';
 export const commands: { [key: string]: Command } = {
   help: {
     name: 'help',
-    description: 'List all available commands',
+    description: 'List all commands',
     execute: () => {
       const helpLines = Object.entries(commands).map(([name, cmd]) => {
         const commandName = name.padEnd(20);
@@ -53,39 +53,38 @@ export const commands: { [key: string]: Command } = {
       return {
         type: 'text',
         content: (
-          <pre style={{ margin: 0 }}>
-            <div style={{ color: '#ff8800' }}>═══════════════════════════════════════════════════════════</div>
-            <div style={{ color: '#ccc', fontWeight: 'bold' }}>STUDENT ACADEMIC RECORD</div>
-            <div style={{ color: '#ff8800' }}>═══════════════════════════════════════════════════════════</div>
+          <pre style={{ margin: 0 }} className="education-output">
+            <div style={{ color: '#ccc', fontWeight: 'bold' }}>result.student.record</div>
+            <div className="education-border" style={{ color: '#ff8800' }}>──────────────────────────</div>
             <div>
               <span style={{ color: '#ccc' }}>Name:           </span>
-              <span style={{ color: '#0f0' }}>{about.name}</span>
+              <span style={{ color: '#b4befe' }}>"{about.name}"</span>
             </div>
             <div>
-              <span style={{ color: '#ccc' }}>Institution:    </span>
-              <span style={{ color: '#0f0' }}>{about.university}</span>
+              <span style={{ color: '#ccc', display: 'inline-block', verticalAlign: 'top' }}>Institution:    </span>
+              <span style={{ color: '#b4befe', display: 'inline-block', maxWidth: 'calc(100% - 16ch)' }}>"{about.university}"</span>
             </div>
             <div>
               <span style={{ color: '#ccc' }}>Major:          </span>
-              <span style={{ color: '#0f0' }}>{about.major}</span>
+              <span style={{ color: '#b4befe' }}>"{about.major}"</span>
             </div>
             <div>
               <span style={{ color: '#ccc' }}>Degree:         </span>
-              <span style={{ color: '#0f0' }}>Bachelor of Science</span>
+              <span style={{ color: '#b4befe' }}>"Bachelor of Science"</span>
             </div>
             <div>
               <span style={{ color: '#ccc' }}>Status:         </span>
-              <span style={{ color: '#0f0' }}>Senior (Expected: May 2026)</span>
+              <span style={{ color: '#b4befe' }}>"Senior (Expected: May 2026)"</span>
             </div>
             <div>
               <span style={{ color: '#ccc' }}>GPA:            </span>
-              <span style={{ color: '#0f0' }}>3.88/4.00</span>
+              <span style={{ color: '#b4befe' }}>"3.88/4.00"</span>
             </div>
             <div>
               <span style={{ color: '#ccc' }}>Age:            </span>
-              <span style={{ color: '#0f0' }}>{about.age}</span>
+              <span style={{ color: '#b4befe' }}>"{about.age}"</span>
             </div>
-            <div style={{ color: '#ff8800' }}>═══════════════════════════════════════════════════════════</div>
+            <div className="education-border" style={{ color: '#ff8800' }}>──────────────────────────</div>
           </pre>
         )
       };
@@ -129,7 +128,7 @@ export const commands: { [key: string]: Command } = {
         content: (
           <pre style={{ margin: 0 }}>
             <div style={{ color: '#ccc', fontWeight: 'bold' }}>result contact.info</div>
-            <div style={{ color: '#ff8800' }}>─────────────────────────────────────────────────</div>
+            <div className="contact-border" style={{ color: '#ff8800' }}>──────────────────────────</div>
             <div>
               <span style={{ color: '#ccc' }}>email       </span>
               <span style={{ color: '#b4befe' }}>"{about.email}"</span>
@@ -142,7 +141,7 @@ export const commands: { [key: string]: Command } = {
               <span style={{ color: '#ccc' }}>phone       </span>
               <span style={{ color: '#b4befe' }}>"+1 (312) 292-7975"</span>
             </div>
-            <div style={{ color: '#ff8800' }}>─────────────────────────────────────────────────</div>
+            <div className="contact-border" style={{ color: '#ff8800' }}>──────────────────────────</div>
           </pre>
         )
       };
