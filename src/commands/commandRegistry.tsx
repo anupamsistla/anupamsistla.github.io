@@ -54,7 +54,7 @@ export const commands: { [key: string]: Command } = {
         type: 'text',
         content: (
           <pre style={{ margin: 0 }} className="education-output">
-            <div style={{ color: '#ccc', fontWeight: 'bold' }}>result.student.record</div>
+            <div style={{ color: '#ccc', fontWeight: 'bold' }}>result student.record</div>
             <div className="education-border" style={{ color: '#ff8800' }}>──────────────────────────</div>
             <div>
               <span style={{ color: '#ccc', display: 'inline-block', verticalAlign: 'top' }}>Name:           </span>
