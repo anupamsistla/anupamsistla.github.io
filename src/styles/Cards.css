@@ -16,8 +16,8 @@
 
 .close-btn {
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: 24px;
+  right: 24px;
   background: #ff8800;
   border: none;
   color: #000;
@@ -69,10 +69,43 @@
   position: relative;
 }
 
+.clickable-card {
+  cursor: pointer;
+}
+
+.clickable-card:hover {
+  border-color: #ff8800;
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(255, 136, 0, 0.2);
+}
+
 .card:hover {
   border-color: #ff8800;
   transform: translateY(-4px);
   box-shadow: 0 4px 12px rgba(255, 136, 0, 0.2);
+}
+
+.info-indicator {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  color: #ff8800;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  border: 2px solid #ff8800;
+  background: transparent;
+  transition: all 0.2s ease;
+}
+
+.clickable-card:hover .info-indicator {
+  background: #ff8800;
+  color: #000;
+  transform: scale(1.15);
 }
 
 .info-btn {
@@ -258,6 +291,19 @@
     -webkit-overflow-scrolling: touch;
   }
 
+  .skills-container::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .skills-container::-webkit-scrollbar-track {
+    background: rgba(68, 68, 68, 0.3);
+  }
+
+  .skills-container::-webkit-scrollbar-thumb {
+    background: #666;
+    border-radius: 3px;
+  }
+
   .skill-category {
     min-width: max-content;
   }
@@ -357,6 +403,19 @@
   .skills-container {
     font-size: 0.45rem;
     overflow-x: scroll;
+  }
+
+  .skills-container::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .skills-container::-webkit-scrollbar-track {
+    background: rgba(68, 68, 68, 0.3);
+  }
+
+  .skills-container::-webkit-scrollbar-thumb {
+    background: #666;
+    border-radius: 3px;
   }
   
   .skill-category {

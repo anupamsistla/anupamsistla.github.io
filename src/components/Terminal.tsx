@@ -30,6 +30,15 @@ const Terminal: React.FC = () => {
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Make executeCommand available globally
+    (window as any).executeTerminalCommand = handleCommandSubmit;
+    
+    return () => {
+      delete (window as any).executeTerminalCommand;
+    };
+  }, [history, commandHistory, historyIndex]);
+
+  useEffect(() => {
     // Initialization animation
     const fullText = 'Initializing portfolio environment....';
     let currentIndex = 0;

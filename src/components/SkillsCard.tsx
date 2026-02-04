@@ -49,9 +49,7 @@ const SkillsCard: React.FC = () => {
   return (
     <div className="skills-container">
       {renderSkillCategory('Languages', skills.languages)}
-      <br />
       {renderSkillCategory('Frameworks', skills.frameworks)}
-      <br />
       {renderSkillCategory('Tools', skills.tools)}
     </div>
   );

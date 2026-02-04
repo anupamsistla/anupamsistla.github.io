@@ -30,6 +30,38 @@ const App: React.FC = () => {
           </div>
         </div>
         <Terminal />
+        <div className="terminal-quick-actions">
+          <button className="terminal-quick-btn" onClick={() => {
+            if ((window as any).executeTerminalCommand) {
+              (window as any).executeTerminalCommand('skills');
+            }
+          }}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9 2C8.45 2 8 2.45 8 3V5H4C2.89 5 2 5.89 2 7V10C2 10.55 2.45 11 3 11H6V13H3C2.45 13 2 13.45 2 14V21C2 21.55 2.45 22 3 22H9C9.55 22 10 21.55 10 21V18H14V21C14 21.55 14.45 22 15 22H21C21.55 22 22 21.55 22 21V14C22 13.45 21.55 13 21 13H18V11H21C21.55 11 22 10.55 22 10V7C22 5.89 21.1 5 20 5H16V3C16 2.45 15.55 2 15 2H9M10 7H14V13H10V7M16 11V13H20V16H16V20H14V14H10V20H8V16H4V13H8V11H16Z"/>
+            </svg>
+            Skills
+          </button>
+          <button className="terminal-quick-btn" onClick={() => {
+            if ((window as any).executeTerminalCommand) {
+              (window as any).executeTerminalCommand('experience');
+            }
+          }}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M10,2H14A2,2 0 0,1 16,4V6H20A2,2 0 0,1 22,8V19A2,2 0 0,1 20,21H4C2.89,21 2,20.1 2,19V8C2,6.89 2.89,6 4,6H8V4C8,2.89 8.89,2 10,2M14,6V4H10V6H14Z"/>
+            </svg>
+            Experience
+          </button>
+          <button className="terminal-quick-btn" onClick={() => {
+            if ((window as any).executeTerminalCommand) {
+              (window as any).executeTerminalCommand('projects');
+            }
+          }}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8,3A2,2 0 0,0 6,5V9A2,2 0 0,1 4,11H3V13H4A2,2 0 0,1 6,15V19A2,2 0 0,0 8,21H10V19H8V14A2,2 0 0,0 6,12A2,2 0 0,0 8,10V5H10V3M16,3A2,2 0 0,1 18,5V9A2,2 0 0,0 20,11H21V13H20A2,2 0 0,0 18,15V19A2,2 0 0,1 16,21H14V19H16V14A2,2 0 0,1 18,12A2,2 0 0,1 16,10V5H14V3H16Z"/>
+            </svg>
+            Projects
+          </button>
+        </div>
       </div>
     </div>
   );

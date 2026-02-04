@@ -2,7 +2,7 @@
   width: 100%;
   max-width: 1400px;
   min-height: 200px;
-  max-height: 650px;
+  max-height: 750px;
   background-color: #1a1a1a;
   border: 1px solid #333333;
   border-radius: 8px;
@@ -208,4 +208,22 @@
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .terminal {
+    max-height: 600px;
+  }
+
+  .scroll-hint {
+    clear: both;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 480px) {
+  .terminal {
+    max-height: 550px;
+  }
 }

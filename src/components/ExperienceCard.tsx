@@ -1,12 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { experiences } from '../data/experience';
 import '../styles/Cards.css';
 
 const ExperienceCard: React.FC = () => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const detailBoxRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleCardClick = (index: number) => {
     setSelectedIndex(index);
+    
+    // On mobile, scroll to the detail box title after render
+    if (isMobile) {
+      setTimeout(() => {
+        if (detailBoxRef.current) {
+          detailBoxRef.current.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start' 
+          });
+        }
+      }, 150);
+    }
   };
 
   const handleClose = () => {
@@ -16,7 +36,7 @@ const ExperienceCard: React.FC = () => {
   return (
     <div className="experience-wrapper">
       {selectedIndex !== null && (
-        <div className="detail-box">
+        <div className="detail-box" ref={detailBoxRef}>
           <button className="close-btn" onClick={handleClose}>
             ×
           </button>
@@ -61,7 +81,19 @@ const ExperienceCard: React.FC = () => {
       {selectedIndex === null && (
         <div className="cards-container">
           {experiences.map((exp, index) => (
-            <div key={index} className="card experience-card">
+            <div 
+              key={index} 
+              className="card experience-card clickable-card"
+              onClick={() => handleCardClick(index)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  handleCardClick(index);
+                }
+              }}
+            >
               <div className="card-header">
                 <h3>{exp.title}</h3>
               </div>
@@ -71,13 +103,9 @@ const ExperienceCard: React.FC = () => {
                 <p className="card-description">{exp.description}</p>
               </div>
               
-              <button 
-                className="info-btn"
-                onClick={() => handleCardClick(index)}
-                aria-label="View details"
-              >
+              <div className="info-indicator" aria-hidden="true">
                 <span className="info-icon">ⓘ</span>
-              </button>
+              </div>
             </div>
           ))}
         </div>
