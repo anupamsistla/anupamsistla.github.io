@@ -39,7 +39,10 @@ const ExperienceCard: React.FC = () => {
     }
   };
 
-  const handleClose = () => {
+  const handleClose = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
     // Blur any active input to prevent keyboard from opening on mobile
     if (document.activeElement instanceof HTMLElement) {
       document.activeElement.blur();
@@ -52,7 +55,7 @@ const ExperienceCard: React.FC = () => {
     <div className="experience-wrapper">
       {selectedIndex !== null && (
         <div className="detail-box" ref={detailBoxRef}>
-          <button className="close-btn" onClick={handleClose}>
+          <button className="close-btn" onClick={(e) => handleClose(e)}>
             ×
           </button>
           <h3 className="detail-title">{experiences[selectedIndex].title}</h3>
