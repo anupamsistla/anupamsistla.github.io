@@ -13,6 +13,9 @@ export type CommandResult = {
     type: 'experience';
 } | {
     type: 'skills';
+} | {
+    type: 'about';
+    content: string;
 };
 
 export interface HistoryEntry {

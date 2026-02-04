@@ -28,6 +28,19 @@ const CommandOutput: React.FC<CommandOutputProps> = ({ output }) => {
     );
   }
 
+  if (output.type === 'about') {
+    return (
+      <div className="output">
+        <div dangerouslySetInnerHTML={{ __html: output.content as string }} style={{ whiteSpace: 'pre-wrap' }} />
+        {isMobile && (
+          <div className="scroll-hint" style={{ marginTop: '36px', color: '#888', fontSize: '16px', fontWeight: 'bold' }}>
+            &lt;! Scroll up to view full about &gt;
+          </div>
+        )}
+      </div>
+    );
+  }
+
   if (output.type === 'experience') {
     return (
       <div className="output">

@@ -32,8 +32,8 @@ export const commands: { [key: string]: Command } = {
         .replace(/Internship roles/g, '<span style="font-weight: bold; color: #ff8800;">Internship roles</span>')
         .replace(/Software Engineering/g, '<span style="font-weight: bold; color: #ff8800;">Software Engineering</span>');
       return {
-        type: 'text',
-        content: <div dangerouslySetInnerHTML={{ __html: bioText }} />
+        type: 'about',
+        content: bioText
       };
     }
   },
