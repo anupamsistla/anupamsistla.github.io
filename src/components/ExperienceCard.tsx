@@ -13,7 +13,17 @@ const ExperienceCard: React.FC = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const handleCardClick = (index: number) => {
+  const handleCardClick = (index: number, e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    
+    // Blur any active input to prevent keyboard from opening on mobile
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+
     setSelectedIndex(index);
     
     // On mobile, scroll to the detail box title after render
@@ -84,7 +94,7 @@ const ExperienceCard: React.FC = () => {
             <div 
               key={index} 
               className="card experience-card clickable-card"
-              onClick={() => handleCardClick(index)}
+              onClick={(e) => handleCardClick(index, e)}
               role="button"
               tabIndex={0}
               onKeyDown={(e) => {
