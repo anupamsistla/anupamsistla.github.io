@@ -40,6 +40,11 @@ const ExperienceCard: React.FC = () => {
   };
 
   const handleClose = () => {
+    // Blur any active input to prevent keyboard from opening on mobile
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+    
     setSelectedIndex(null);
   };
 
