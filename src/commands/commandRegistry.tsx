@@ -112,7 +112,7 @@ export const commands: { [key: string]: Command } = {
     name: 'resume',
     description: 'My Resume',
     execute: () => {
-      window.open(`${process.env.PUBLIC_URL}/Resume/Anupam_Resume.pdf`, '_blank');
+      window.open(`${process.env.PUBLIC_URL}/Resume/Resume_latest_Anupam.pdf`, '_blank');
       return {
         type: 'text',
         content: 'Opening resume...'

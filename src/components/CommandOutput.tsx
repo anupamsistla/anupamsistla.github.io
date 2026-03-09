@@ -20,10 +20,10 @@ const CommandOutput: React.FC<CommandOutputProps> = ({ output }) => {
   if (output.type === 'projects') {
     return (
       <div className="output">
-        <ProjectCard />
-        <div className="scroll-hint" style={{ marginTop: '36px', color: '#888', fontSize: '16px', fontWeight: 'bold' }}>
-          &lt;! Scroll up for all projects &gt;
+        <div className="scroll-hint" style={{ marginBottom: '16px', color: '#888', fontSize: '16px', fontWeight: 'bold' }}>
+          &lt;! Scroll down for all projects &gt;
         </div>
+        <ProjectCard />
       </div>
     );
   }
@@ -31,12 +31,12 @@ const CommandOutput: React.FC<CommandOutputProps> = ({ output }) => {
   if (output.type === 'about') {
     return (
       <div className="output">
-        <div dangerouslySetInnerHTML={{ __html: output.content as string }} style={{ whiteSpace: 'pre-wrap' }} />
         {isMobile && (
-          <div className="scroll-hint" style={{ marginTop: '36px', color: '#888', fontSize: '16px', fontWeight: 'bold' }}>
-            &lt;! Scroll up to view full about &gt;
+          <div className="scroll-hint" style={{ marginBottom: '16px', color: '#888', fontSize: '16px', fontWeight: 'bold' }}>
+            &lt;! Scroll down to view full about &gt;
           </div>
         )}
+        <div dangerouslySetInnerHTML={{ __html: output.content as string }} style={{ whiteSpace: 'pre-wrap' }} />
       </div>
     );
   }
@@ -44,12 +44,12 @@ const CommandOutput: React.FC<CommandOutputProps> = ({ output }) => {
   if (output.type === 'experience') {
     return (
       <div className="output">
-        <ExperienceCard />
         {isMobile && (
-          <div className="scroll-hint" style={{ marginTop: '36px', color: '#888', fontSize: '16px', fontWeight: 'bold' }}>
-            &lt;! Scroll up for all experiences &gt;
+          <div className="scroll-hint" style={{ marginBottom: '16px', color: '#888', fontSize: '16px', fontWeight: 'bold' }}>
+            &lt;! Scroll down for all experiences &gt;
           </div>
         )}
+        <ExperienceCard />
       </div>
     );
   }
@@ -57,10 +57,10 @@ const CommandOutput: React.FC<CommandOutputProps> = ({ output }) => {
   if (output.type === 'skills') {
     return (
       <div className="output">
-        <SkillsCard />
-        <div className="scroll-hint" style={{ marginTop: '16px', color: '#888', fontSize: '16px', fontWeight: 'bold' }}>
-          &lt;! Scroll up for all skills &gt;
+        <div className="scroll-hint" style={{ marginBottom: '16px', color: '#888', fontSize: '16px', fontWeight: 'bold' }}>
+          &lt;! Scroll down for all skills &gt;
         </div>
+        <SkillsCard />
       </div>
     );
   }

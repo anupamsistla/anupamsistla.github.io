@@ -4,10 +4,10 @@ export const projects: Project[] = [
   {
     name: "Autonomous Debris Clearing Rover",
     description: "Autonomous Debris Clearing Robot utilizing computer vision to detect and remove obstacles autonomously in real-time",
-    technologies: ["Python", "Dart", "OpenCV", "NumPy", "GraphQL"],
+    technologies: ["Python", "Flutter", "OpenCV", "YOLOv3", "GraphQL"],
     highlights: [
-      "Built an autonomous rover capable of detecting and clearing debris within a predefined perimeter using real-time computer vision with OpenCV, NumPy, and YOLOv3",
-      "Implemented a GraphQL telemetry and control API over Wi-Fi/LTE to stream rover state, object detections, and navigation status to a Dart mobile application with live video streaming"
+      "Built an autonomous rover using real-time computer vision with OpenCV and YOLOv3 to detect and clear debris within a predefined perimeter, supporting remote control through a Flutter mobile app with a live onboard camera feed",
+      "Developed a GraphQL telemetry and control API over WebSockets to deliver rover state analytics (object detections, navigation status) to mobile client and issue control commands"
     ],
     videoUrl: "https://www.youtube.com/embed/4Ge4vw6to4c"
   },

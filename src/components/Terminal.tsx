@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react'; // useEffect kept for global command handler
 import CommandInput from './CommandInput';
 import CommandOutput from './CommandOutput';
 import PromptLine from './PromptLine';
@@ -21,11 +21,9 @@ const WelcomeMessage: React.FC = () => (
 );
 
 const Terminal: React.FC = () => {
-  const [history, setHistory] = useState<HistoryEntry[]>([]);
+  const [history, setHistory] = useState<HistoryEntry[]>([{ command: '', output: { type: 'text', content: <WelcomeMessage /> } }]);
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState<number>(-1);
-  const [isInitializing, setIsInitializing] = useState<boolean>(true);
-  const [initText, setInitText] = useState<string>('');
   const terminalRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -38,33 +36,8 @@ const Terminal: React.FC = () => {
     };
   }, [history, commandHistory, historyIndex]);
 
-  useEffect(() => {
-    // Initialization animation
-    const fullText = 'Initializing portfolio environment....';
-    let currentIndex = 0;
-    
-    const typingInterval = setInterval(() => {
-      if (currentIndex <= fullText.length) {
-        setInitText(fullText.slice(0, currentIndex));
-        currentIndex++;
-      } else {
-        clearInterval(typingInterval);
-        setTimeout(() => {
-          setIsInitializing(false);
-          setHistory([{ command: '', output: { type: 'text', content: <WelcomeMessage /> } }]);
-        }, 500);
-      }
-    }, 50);
 
-    return () => clearInterval(typingInterval);
-  }, []);
 
-  useEffect(() => {
-    // Scroll to bottom when history changes
-    if (contentRef.current) {
-      contentRef.current.scrollTop = contentRef.current.scrollHeight;
-    }
-  }, [history, initText]);
 
   const handleCommandSubmit = (input: string) => {
     const output = handleCommand(input);
@@ -95,7 +68,11 @@ const Terminal: React.FC = () => {
   };
 
   return (
-    <div className="terminal" ref={terminalRef} onClick={() => document.getElementById('command-input')?.focus()}>
+    <div className="terminal" ref={terminalRef} onClick={() => {
+      const selection = window.getSelection();
+      if (selection && selection.toString().length > 0) return;
+      document.getElementById('command-input')?.focus({ preventScroll: true });
+    }}>
       <div className="terminal-header">
         <div className="window-controls">
           <span className="control-btn close"></span>
@@ -110,21 +87,13 @@ const Terminal: React.FC = () => {
         </div>
       </div>
       <div className="terminal-content" ref={contentRef}>
-        {isInitializing ? (
-          <div style={{ color: '#ff8800', padding: '20px' }}>
-            {initText}<span className="cursor-blink">_</span>
+        {history.map((entry, index) => (
+          <div key={index}>
+            {entry.command && <PromptLine command={entry.command} />}
+            {entry.output && <CommandOutput output={entry.output} />}
           </div>
-        ) : (
-          <>
-            {history.map((entry, index) => (
-              <div key={index}>
-                {entry.command && <PromptLine command={entry.command} />}
-                {entry.output && <CommandOutput output={entry.output} />}
-              </div>
-            ))}
-            <CommandInput onCommandSubmit={handleCommandSubmit} getHistoryCommand={getHistoryCommand} />
-          </>
-        )}
+        ))}
+        <CommandInput onCommandSubmit={handleCommandSubmit} getHistoryCommand={getHistoryCommand} />
       </div>
     </div>
   );
