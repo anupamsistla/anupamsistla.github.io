@@ -162,6 +162,12 @@
   color: #cccccc;
 }
 
+.output-anchor {
+  height: 0;
+  margin: 0;
+  padding: 0;
+}
+
 .output pre {
   font-family: 'Courier New', Courier, monospace;
   font-size: 16px;

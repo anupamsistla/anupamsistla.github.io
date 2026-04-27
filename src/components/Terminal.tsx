@@ -3,7 +3,7 @@ import CommandInput from './CommandInput';
 import CommandOutput from './CommandOutput';
 import PromptLine from './PromptLine';
 import { HistoryEntry } from '../types';
-import { handleCommand } from '../commands/commandHandler';
+import { handleCommand, isValidCommandInput } from '../commands/commandHandler';
 import '../styles/Terminal.css';
 
 const WelcomeMessage: React.FC = () => (
@@ -24,8 +24,10 @@ const Terminal: React.FC = () => {
   const [history, setHistory] = useState<HistoryEntry[]>([{ command: '', output: { type: 'text', content: <WelcomeMessage /> } }]);
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState<number>(-1);
+  const [pendingAutoScroll, setPendingAutoScroll] = useState<boolean>(false);
   const terminalRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const latestOutputAnchorRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Make executeCommand available globally
@@ -36,20 +38,52 @@ const Terminal: React.FC = () => {
     };
   }, [history, commandHistory, historyIndex]);
 
+  useEffect(() => {
+    if (!pendingAutoScroll) return;
+
+    const contentElement = contentRef.current;
+    const outputAnchor = latestOutputAnchorRef.current;
+
+    if (!contentElement || !outputAnchor) {
+      setPendingAutoScroll(false);
+      return;
+    }
+
+    const animationFrameId = window.requestAnimationFrame(() => {
+      const contentRect = contentElement.getBoundingClientRect();
+      const anchorRect = outputAnchor.getBoundingClientRect();
+      const anchorOffsetTop = anchorRect.top - contentRect.top + contentElement.scrollTop;
+      const viewportOffset = Math.max(16, Math.round(contentElement.clientHeight * 0.14));
+
+      contentElement.scrollTo({
+        top: Math.max(0, anchorOffsetTop - viewportOffset),
+        behavior: 'smooth'
+      });
+
+      setPendingAutoScroll(false);
+    });
+
+    return () => window.cancelAnimationFrame(animationFrameId);
+  }, [history, pendingAutoScroll]);
+
 
 
 
   const handleCommandSubmit = (input: string) => {
+    const trimmedInput = input.trim();
+    const shouldAutoScroll = isValidCommandInput(trimmedInput);
     const output = handleCommand(input);
     
     if (output.type === 'text' && output.content === 'CLEAR') {
       setHistory([{ command: '', output: { type: 'text', content: <WelcomeMessage /> } }]);
+      setPendingAutoScroll(false);
       return;
     }
 
     setHistory([...history, { command: input, output }]);
     setCommandHistory([...commandHistory, input]);
     setHistoryIndex(-1);
+    setPendingAutoScroll(shouldAutoScroll);
   };
 
   const getHistoryCommand = (direction: 'up' | 'down'): string => {
@@ -87,12 +121,21 @@ const Terminal: React.FC = () => {
         </div>
       </div>
       <div className="terminal-content" ref={contentRef}>
-        {history.map((entry, index) => (
-          <div key={index}>
-            {entry.command && <PromptLine command={entry.command} />}
-            {entry.output && <CommandOutput output={entry.output} />}
-          </div>
-        ))}
+        {history.map((entry, index) => {
+          const isLatestEntry = index === history.length - 1;
+
+          return (
+            <div key={index}>
+              {entry.command && <PromptLine command={entry.command} />}
+              {entry.output && (
+                <>
+                  {isLatestEntry && entry.command && <div className="output-anchor" ref={latestOutputAnchorRef} aria-hidden="true" />}
+                  <CommandOutput output={entry.output} />
+                </>
+              )}
+            </div>
+          );
+        })}
         <CommandInput onCommandSubmit={handleCommandSubmit} getHistoryCommand={getHistoryCommand} />
       </div>
     </div>

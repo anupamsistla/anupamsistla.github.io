@@ -1,6 +1,23 @@
 import { commands } from './commandRegistry';
 import { CommandResult } from '../types';
 
+export const isValidCommandInput = (input: string): boolean => {
+  const trimmedInput = input.trim();
+
+  if (!trimmedInput) {
+    return false;
+  }
+
+  if (commands[trimmedInput]) {
+    return true;
+  }
+
+  const parts = trimmedInput.split(' ');
+  const commandName = parts[0].toLowerCase();
+
+  return Boolean(commands[commandName]);
+};
+
 export const handleCommand = (input: string): CommandResult => {
   const trimmedInput = input.trim();
   
